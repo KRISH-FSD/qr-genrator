@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div class="container2" id="c2">
+        <h2>QRCode</h2>
+        <input
+          type="text"
+          placeholder="Enter the link to generate"
+          id="links"
+        />
+        <div id="qrcode-cont"></div>
+        <button onclick="qrcodegenerator()" id="button">Generate QR</button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+      function qrcodegenerator() {
+        const links = document.getElementById("links").value;
+        const qrcontainer = document.getElementById("qrcode-cont");
+        qrcontainer.innerHTML = "";
+
+        if (links.trim() !== "") {
+          new QRCode(qrcontainer, {
+            text: links,
+            width: 150,
+            height: 150,
+            correctLevel: QRCode.CorrectLevel.H,
+          });
+          document.getElementById("c2").style.height = "450px";
+          qrcontainer.style.margin = "50px";
+          qrcontainer.style.transition = "0.8s";
+          document.getElementById("button").style.transition = "0.8px";
+        }
+        if (links.trim() === "") {
+          alert("Please enter a link to generate a QR code.");
+          document.getElementById("c2").style.height = "200px";
+          qrcontainer.style.margin = "0px";
+        }
+      }
+    </script>
+  </body>
+</html>
